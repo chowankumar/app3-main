@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import img1 from "./calendly.png";
+import heroVideo from "../assets/heroVideo.mp4";
 
 import logo1 from "./Client Logos/1.png";
 import logo2 from "./Client Logos/2.png";
@@ -32,11 +33,6 @@ import logo27 from "./Client Logos/27.png";
 import logo28 from "./Client Logos/28.png";
 import logo29 from "./Client Logos/29.png";
 import logo30 from "./Client Logos/30.png";
-
-import VideoCard from "./Vedio.jsx";
-
-const video3 =
-  "https://res.cloudinary.com/dyrncskbs/video/upload/hero_2_qrdenq.mp4";
 
 const logos = [
   logo1,
@@ -78,6 +74,7 @@ export default function Hero() {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % logos.length);
     }, 2500);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -85,14 +82,16 @@ export default function Hero() {
     <>
       <section
         id="home"
-        className="relative min-h-150 flex items-center pt-28 px-6 md:px-12 text-[#C6FD07] bg-[#00303C] overflow-hidden"
+        className="relative min-h-[600px] flex items-center pt-28 px-6 md:px-12 text-[#C6FD07] bg-[#00303C] overflow-hidden"
       >
+        {/* Background Blobs */}
         <motion.div
           aria-hidden="true"
           className="pointer-events-none absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#C6FD07]/10 blur-3xl"
           animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
           transition={{ repeat: Infinity, duration: 14, ease: "easeInOut" }}
         />
+
         <motion.div
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-40 -right-20 w-[28rem] h-[28rem] rounded-full bg-[#C6FD07]/10 blur-3xl"
@@ -100,7 +99,8 @@ export default function Hero() {
           transition={{ repeat: Infinity, duration: 18, ease: "easeInOut" }}
         />
 
-        <div className="relative w-full max-w-306 mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="relative w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -127,14 +127,15 @@ export default function Hero() {
                 href="https://calendly.com/ajaykumarchouhan/hayviral-free-discovering-call"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-[#00303C] bg-[#C6FD07] px-6 py-3 rounded-full font-semibold flex flex-row justify-center items-center gap-3 shadow-lg text-[#00303C] hover:scale-[1.02] transition text-sm"
+                className="border border-[#00303C] bg-[#C6FD07] px-6 py-3 rounded-full font-semibold flex items-center gap-3 shadow-lg text-[#00303C] hover:scale-[1.02] transition text-sm"
               >
                 Book a Free Discovery Call
-                <img className="h-5" src={img1} alt="call-icon" />
+                <img className="h-5" src={img1} alt="Call Icon" />
               </a>
             </div>
           </motion.div>
 
+          {/* Hero Video */}
           <div className="w-full rounded-3xl overflow-hidden border border-[#C6FD07]/30 shadow-2xl">
             <video
               autoPlay
@@ -142,15 +143,16 @@ export default function Hero() {
               loop
               playsInline
               preload="metadata"
-              className="w-[500px] h-[400px] rounded-3xl object-cover"
+              className="w-full h-[400px] rounded-3xl object-cover"
             >
-              <source src={video3} type="video/mp4" />
+              <source src={heroVideo} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
         </div>
       </section>
 
+      {/* Client Logos */}
       <div className="overflow-hidden w-screen md:w-full bg-transparent p-1.5">
         <motion.div
           className="flex items-center gap-14 min-w-max"
@@ -164,8 +166,9 @@ export default function Hero() {
             >
               <img
                 src={logo}
-                alt="Client Logo"
+                alt={`Client Logo ${i + 1}`}
                 className="max-h-full max-w-full object-contain opacity-80"
+                loading="lazy"
               />
             </div>
           ))}
